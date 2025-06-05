@@ -194,4 +194,4 @@ cython_debug/
 .cursorindexingignore
 
 #HOWTHEYVOTE
-data/howTheyVoteDataset/*
+data/howTheyVoteDataSet/*
