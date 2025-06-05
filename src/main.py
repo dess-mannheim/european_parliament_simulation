@@ -69,16 +69,10 @@ class EuropeanVoter:
         self._generate_prompts_for_vote()
 
     def _find_relevant_speeches(self) -> list[str]:
-        #df_speeches = pd.read_csv("../own_data/debate_xmls/all_debates_after_brexit_translated.csv")
-        # df_speeches = pd.read_csv("../own_data/debate_xmls/all_debates_after_brexit_translated_ids.csv")
-        # df_speeches = df_speeches[df_speeches["speaker_type"] == "au nom du groupe"]
-        # df_speeches['vote_id'] = df_speeches['vote_id'].apply(lambda x: ast.literal_eval(x))
-        # df_speeches = df_speeches[df_speeches['vote_id'].apply(lambda x: self._vote_id in x)]
-        # speeches = df_speeches["translated_speech"].to_list()
         if self._modified_speeches:
-            df_speeches = pd.read_csv("speeches_for_vote_modified.csv")
+            df_speeches = pd.read_csv("../data/debates/speeches.csv")
         else:
-            df_speeches = pd.read_csv("counterfactual_speeches_with_title.csv")
+            df_speeches = pd.read_csv("../data/debates/counterfactual_speeches.csv")
         df_speeches = df_speeches[df_speeches['id'] == self._vote_id]
         
         if self._modified_speeches:
@@ -96,8 +90,8 @@ class EuropeanVoter:
 
     def _find_relevant_voters(self) -> pd.DataFrame:
         if self._give_wiki:
-            df_prompt = pd.read_csv("../own_data/members/prompts_2019.csv")
-            df_member_votes = pd.read_csv("../howTheyVoteDataSet/member_votes.csv")
+            df_prompt = pd.read_csv("../data/personas/prompts_2019.csv")
+            df_member_votes = pd.read_csv("../data/howTheyVoteDataSet/member_votes.csv")
             df_specific_votes: pd.DataFrame = df_member_votes[df_member_votes["vote_id"] == self._vote_id]
             df_result = df_specific_votes.merge(df_prompt, left_on="member_id", right_on="id")
             df_result = df_result[df_result["position"] != "DID_NOT_VOTE"]
@@ -113,9 +107,9 @@ class EuropeanVoter:
             
             df_result = pd.DataFrame(persona_list, columns=["persona", "vote_id"])
         else:
-            df_members = pd.read_csv("../own_data/members/members_voting_time.csv")
-            df_member_votes = pd.read_csv("../howTheyVoteDataSet/member_votes.csv")
-            df_votes = pd.read_csv("../howTheyVoteDataSet/votes.csv")
+            df_members = pd.read_csv("../data/personas/members_voting_time.csv")
+            df_member_votes = pd.read_csv("../data/howTheyVoteDataSet/member_votes.csv")
+            df_votes = pd.read_csv("../data/howTheyVoteDataSet/votes.csv")
             row_votes = df_votes[df_votes["id"] == self._vote_id].iloc[0]
             timestamp = pd.to_datetime(row_votes["timestamp"])
             timestamp = timestamp.date()
@@ -130,7 +124,7 @@ class EuropeanVoter:
 
 
     def _create_persona_description(self, row:pd.Series) -> str:
-        df_votes = pd.read_csv("../howTheyVoteDataSet/votes.csv")
+        df_votes = pd.read_csv("../data/howTheyVoteDataSet/votes.csv")
         row_votes = df_votes[df_votes["id"] == self._vote_id].iloc[0]
 
         # Convert to datetime
@@ -202,14 +196,6 @@ class EuropeanVoter:
 
         return politician_description
 
-        # if just_name:
-        #     politician_prompt = politician_prompt + POLITICIAN_NAME
-        # else:
-        #     politician_prompt = politician_prompt + row["prompt"]
-
-        # if give_party:
-        #     politician_prompt = politician_prompt + GROUP_CODE
-
     def _create_task_instruction(self) -> str:
         topic_description = """
 You are voting on a proposition with the title: """ + self._vote_title
@@ -249,7 +235,7 @@ Other politician have given the following speeches:"""
         print(all_prompts[0])
         self._voters["full_instruction"] = all_prompts
 
-    def vote(self, llama:BasicLLama, repeat_per_person:int = 3, retries:int =3, batch_generation:bool = False, verbose:bool = False, temperature: float = 0.6, use_vllm: bool = False) -> pd.DataFrame:
+    def vote(self, llama:BasicLLama, repeat_per_person:int = 3, retries:int =3, batch_generation:bool = False, verbose:bool = False, temperature: float = 0.6, use_vllm: bool = True) -> pd.DataFrame:
         vote_result = []
         for i, row in tqdm.tqdm(self._voters.iterrows(), total=self._voters.shape[0], position=0, leave=True):
             parsed_dict = {attribute: [] for attribute in self._json_attributes}
@@ -348,7 +334,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         '--output', 
         type=str,
-        default="../own_data/votes/", 
+        default="../result/votes/", 
         help='The output path.'
     )
 
@@ -446,7 +432,7 @@ if __name__ == "__main__":
     if args.modified_speeches:
         print("running modified speeches")
     
-    df_votes = pd.read_csv("../howTheyVoteDataSet/votes.csv")
+    df_votes = pd.read_csv("../data/howTheyVoteDataSet/votes.csv")
 
     df_votes['timestamp'] = pd.to_datetime(df_votes['timestamp'], errors='coerce')
 
@@ -470,13 +456,13 @@ if __name__ == "__main__":
 
     print(args.attribute_list)
 
-    llama = BasicLLama(model_id=args.model, vllm_inference=args.vllm)
+    llama = BasicLLama(model_id=args.model)
 
     print(args.vote_list)
 
     vote_id_ints = list(map(int, args.vote_list))
 
-    df_speeches = pd.read_csv("counterfactual_speeches_with_title.csv")
+    df_speeches = pd.read_csv("../data/debates/counterfactual_speeches.csv")
     df_votes = df_votes[df_votes["id"].isin(df_speeches["id"])]
 
     if len(args.vote_list) > 0:
