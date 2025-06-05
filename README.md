@@ -3,8 +3,14 @@ Repository for Paper "Persona-driven Simulation of Voting Behavior in the Europe
 
 ![Figure1](figure1.png)
 
+Thanks to HowTheyVote (howtheyvote.eu) for providing roll call vote data. Before simulation roll-call and MEP data have to be downloaded from here: https://github.com/HowTheyVote/data/tree/main
+
+
 Install Requirements: ```pip install -r requirements.txt```
 
+Basic usage: python src/main.py --model=meta-llama/Meta-Llama-3-8B-Instruct
+
+Arguments:
 ```
 usage: main.py [-h] [--model MODEL] [--output OUTPUT] [--reasoning REASONING] [--wiki | --no-wiki]
                [--default_personas | --no-default_personas] [--roll_call | --no-roll_call]
@@ -39,6 +45,3 @@ options:
   --modified_speeches, --no-modified_speeches
                         If true, the regex filtered speeches will be used. (default: True)
 ```
-
-
-Thanks to HowTheyVote (howtheyvote.eu) for providing roll call vote data.
