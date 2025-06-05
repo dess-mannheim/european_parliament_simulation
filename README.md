@@ -8,7 +8,7 @@ Thanks to HowTheyVote ([howtheyvote.eu](https://howtheyvote.eu/)) for providing 
 
 Install Requirements: ```pip install -r requirements.txt```
 
-Basic usage: python src/main.py --model=meta-llama/Meta-Llama-3-8B-Instruct
+Basic usage: python src/main.py --model=meta-llama/Llama-3.1-8B-Instruct
 
 Arguments:
 ```
