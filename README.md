@@ -3,7 +3,7 @@ Repository for Paper "Persona-driven Simulation of Voting Behavior in the Europe
 
 ![Figure1](figure1.png)
 
-Thanks to HowTheyVote (howtheyvote.eu) for providing roll call vote data. Before simulation roll-call and MEP data have to be downloaded from here: https://github.com/HowTheyVote/data/tree/main
+Thanks to HowTheyVote ([howtheyvote.eu](https://howtheyvote.eu/)) for providing roll call vote data. Before simulation roll-call and MEP data have to be downloaded from here: https://github.com/HowTheyVote/data/tree/main
 
 
 Install Requirements: ```pip install -r requirements.txt```
