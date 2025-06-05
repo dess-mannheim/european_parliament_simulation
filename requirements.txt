@@ -1,8 +1,9 @@
-marko==2.1.3
-pandas==2.3.0
-PyYAML==6.0.2
-PyYAML==6.0.2
-torch==2.6.0
-tqdm==4.67.1
-transformers==4.51.3
-vllm==0.8.5
+marko>=2.1.3
+pandas>=2.3.0
+PyYAML>=6.0.2
+torch>=2.6.0
+tqdm>=4.67.1
+transformers>=4.51.3
+vllm>=0.8.5
+accelerate>=1.7.0
+flash-attn>=2.7.4
