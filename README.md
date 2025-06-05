@@ -5,7 +5,8 @@ Repository for Paper "Persona-driven Simulation of Voting Behavior in the Europe
 
 Install Requirements: ```pip install -r requirements.txt```
 
-``` usage: main.py [-h] [--model MODEL] [--output OUTPUT] [--reasoning REASONING] [--wiki | --no-wiki]
+```
+usage: main.py [-h] [--model MODEL] [--output OUTPUT] [--reasoning REASONING] [--wiki | --no-wiki]
                [--default_personas | --no-default_personas] [--roll_call | --no-roll_call]
                [--counter_speeches | --no-counter_speeches] [--only_task | --no-only_task]
                [--attribute_list [ATTRIBUTE_LIST ...]] [--vote_list [VOTE_LIST ...]] [--temperature TEMPERATURE]
@@ -36,7 +37,8 @@ options:
   --opposition, --no-opposition
                         If true, politicians of the opposition will be told to consider ABSTENTIONS. (default: False)
   --modified_speeches, --no-modified_speeches
-                        If true, the regex filtered speeches will be used. (default: True)```
+                        If true, the regex filtered speeches will be used. (default: True)
+```
 
 
 Thanks to HowTheyVote (howtheyvote.eu) for providing roll call vote data.
