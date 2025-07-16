@@ -47,3 +47,8 @@ options:
 ```
 
 The dataset files located in the `/data` directory are licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+
+### How to Cite
+If you use our data or code in your research, please cite our paper:
+
+Kreutner, Maximilian, Marlene Lutz, and Markus Strohmaier. "Persona-driven Simulation of Voting Behavior in the European Parliament with Large Language Models." arXiv preprint arXiv:2506.11798 (2025).
