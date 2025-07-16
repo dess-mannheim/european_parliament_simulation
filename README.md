@@ -45,3 +45,5 @@ options:
   --modified_speeches, --no-modified_speeches
                         If true, the regex filtered speeches will be used. (default: True)
 ```
+
+The persona dataset files located in the `/data` directory are licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
