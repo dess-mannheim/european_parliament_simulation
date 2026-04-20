@@ -50,4 +50,22 @@ The dataset files located in the `/data` directory are licensed under the [Creat
 
 ### How to Cite
 If you use our data or code in your research, please cite our paper:
-Maximilian Kreutner, Marlene Lutz, and Markus Strohmaier. "Persona-driven Simulation of Voting Behavior in the European Parliament with Large Language Models." arXiv preprint arXiv:2506.11798 (2025). (https://arxiv.org/abs/2506.11798)
+```bibtex
+@inproceedings{kreutner-etal-2026-persona,
+    title = "Persona-driven Simulation of Voting Behavior in the {E}uropean Parliament with Large Language Models",
+    author = "Kreutner, Maximilian  and
+      Lutz, Marlene  and
+      Strohmaier, Markus",
+    editor = "Demberg, Vera  and
+      Inui, Kentaro  and
+      Marquez, Llu{\'i}s",
+    booktitle = "Findings of the {A}ssociation for {C}omputational {L}inguistics: {EACL} 2026",
+    month = mar,
+    year = "2026",
+    address = "Rabat, Morocco",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.findings-eacl.25/",
+    doi = "10.18653/v1/2026.findings-eacl.25",
+    pages = "490--511",
+    ISBN = "979-8-89176-386-9"
+}
